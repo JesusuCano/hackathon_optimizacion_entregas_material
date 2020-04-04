@@ -1,19 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script>
+    function showElement(showclass, hideclass){
+        
+        var showcomponent =  document.getElementsByClassName(showclass);
+        var hidecomponent = document.getElementsByClassName(hideclass);
+        for (component in hidecomponent){
+            component.style.display = none;
+        }
+        for (component in hidecomponent){
+            component.style.display = none;
+        }
+    }
+</script>
+<style>
+    .one{
+        display: block
+    }
+    .two {
+        display: none
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 my-5">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header">Register</div>
-                <div class="card-body">
+                <div class="card-body" >
                     <form class="form-singup" action="" method="post" novalidate>
                         <div class="text-center">
                             <img class="mb-4" src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
                             <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
                         </div>
                         {{ form.hidden_tag() }}
-                        <div class="form-group">
+                        <div class="form-group two">
                             {% set error_username = ' is-invalid' if form.username.errors else '' %}
                             {{ form.username.label(class="sr-only", for="input-username") }}
                             {{ form.username(size=32, class='form-control input-lg' + error_username, id="input-username", placeholder=form.username.label.text) }}
@@ -26,7 +47,7 @@
                                 </ul>
                             {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group two">
                             {% set error_email = ' is-invalid' if form.email.errors else '' %}
                             {{ form.email.label(class="sr-only", for="input-username") }}
                             {{ form.email(size=32, class='form-control input-lg' + error_email, id="input_email", placeholder=form.email.label.text) }}
@@ -39,7 +60,7 @@
                                 </ul>
                             {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group two">
                             {% set error_password = ' is-invalid' if form.email.errors else '' %}
                             {{ form.password.label(class="sr-only", for="input-password") }}
                             {{ form.password(size=32, class="form-control" + error_password, id="input-password", placeholder=form.password.label.text) }}
@@ -52,7 +73,7 @@
                                 </ul>
                             {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group two">
                             {% set error_password_confirm = ' is-invalid' if form.password_confirm.errors else '' %}
                             {{ form.password_confirm.label(class="sr-only", for="input-password_confirm") }}
                             {{ form.password_confirm(size=32, class="mb-5 form-control" + error_password_confirm, id="input-password_confirm", placeholder=form.password_confirm.label.text) }}
@@ -64,6 +85,15 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
+                        </div>
+                        <div class="form-group one">
+                            {{form.donate(onclick="showElement('two','one')")}}
+                        </div>
+                        <div class="form-group one">
+                            {{form.supply()}}
+                        </div>
+                        <div class="form-group one">
+                            {{form.apply()}}
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-12">
